@@ -25,6 +25,7 @@ fn main() {
 
     println!(
         "Solution of Day 1, Part 2: {}",
-        day1::part2(&load_file(&(base_path.clone() + "day1.txt")))
+        day1::part2(&load_file(&[&base_path, "day1.txt"].concat()))
+    );
     );
 }
