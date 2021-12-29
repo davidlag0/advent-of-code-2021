@@ -44,4 +44,9 @@ fn main() {
         "Solution of Day 3, Part 1: {}",
         day3::part1(&load_file(&[&base_path, "day3.txt"].concat()))
     );
+
+    println!(
+        "Solution of Day 3, Part 2: {}",
+        day3::part2(&load_file(&[&base_path, "day3.txt"].concat()))
+    );
 }
