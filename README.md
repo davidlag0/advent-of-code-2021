@@ -8,4 +8,4 @@ This year (2021), I'm learning Rust! As I go through Advent of Code, I will atte
 `$ cargo run <path to folder with input files>`
 
 ### Run tests in current environment
-`$ cargo test`
+`$ cargo test -- --nocapture`
