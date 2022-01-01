@@ -1,6 +1,7 @@
 use aoc_rust_2021::day1;
 use aoc_rust_2021::day2;
 use aoc_rust_2021::day3;
+use aoc_rust_2021::day4;
 use std::env;
 use std::fs;
 use std::process;
@@ -48,5 +49,15 @@ fn main() {
     println!(
         "Solution of Day 3, Part 2: {}",
         day3::part2(&load_file(&[&base_path, "day3.txt"].concat()))
+    );
+
+    println!(
+        "Solution of Day 4, Part 1: {}",
+        day4::part1(&load_file(&[&base_path, "day4.txt"].concat()))
+    );
+
+    println!(
+        "Solution of Day 4, Part 2: {}",
+        day4::part2(&load_file(&[&base_path, "day4.txt"].concat()))
     );
 }
