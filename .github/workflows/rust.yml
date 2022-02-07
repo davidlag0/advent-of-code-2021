@@ -55,10 +55,6 @@ jobs:
           override: true
       - name: Cache
         uses: Swatinem/rust-cache@v1
-#      - name: Run cargo test -no-run to know how long it takes to compile code
-#        uses: actions-rs/cargo@v1
-#        with:
-#          command: test --no-run
       - name: Run cargo test
         uses: actions-rs/cargo@v1
         with:
