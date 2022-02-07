@@ -37,6 +37,29 @@ jobs:
 #          command: clippy
 #          args: -- -D warnings
 
+  test:
+    name: Run cargo test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: Install toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: ${{ env.TOOLCHAIN_PROFILE }}
+          toolchain: ${{ env.RUST_TOOLCHAIN }}
+          override: true
+      - name: Cache
+        uses: Swatinem/rust-cache@v1
+      - name: Run cargo test -no-run to know how long it takes to compile code
+        uses: actions-rs/cargo@v1
+        with:
+          command: test --no-run
+      - name: Run cargo test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+
   codecov:
     name: Report code coverage
     runs-on: ubuntu-latest
