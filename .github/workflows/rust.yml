@@ -32,23 +32,21 @@ jobs:
 #          args: -- -D warnings
 
   codecov:
-
+    name: Report code coverage
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-
-    - uses: actions-rs/toolchain@v1
+    - name: Checkout sources
+      uses: actions/checkout@v2
+    - name: Install toolchain
+      uses: actions-rs/toolchain@v1
       with:
         profile: minimal
         toolchain: nightly
-        components: llvm-tools-preview
         override: true
-
-    # Runs cargo with defaults flags, using the default `lcov` output
-    - uses: Swatinem/fucov@v1
-
-    # Upload the report to codecov
-    - uses: codecov/codecov-action@v1
+        components: llvm-tools-preview
+    - name: Calculate code coverage (Runs cargo with defaults flags, using the default `lcov` output)
+      uses: Swatinem/fucov@v1
+    - name: Upload code coverage report to Codecov
+      uses: codecov/codecov-action@v1
       with:
         directory: coverage
