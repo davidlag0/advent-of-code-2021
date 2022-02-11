@@ -7,8 +7,7 @@ use std::fs;
 use std::process;
 
 fn load_file(filename: &str) -> std::string::String {
-    let data = fs::read_to_string(filename).unwrap();
-    data
+    fs::read_to_string(filename).unwrap()
 }
 
 fn main() {

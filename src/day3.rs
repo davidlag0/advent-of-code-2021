@@ -86,7 +86,7 @@ pub fn gamma_rate(numbers: Vec<i32>, binary_number_length: usize) -> i32 {
 
     for position in 0..binary_number_length {
         match counts_of_ones[position] > counts_of_zeroes[position] {
-            true => gamma_rate = gamma_rate | (1 << (binary_number_length - 1 - position)),
+            true => gamma_rate |= 1 << (binary_number_length - 1 - position),
             false => continue,
         }
     }
@@ -103,7 +103,7 @@ pub fn part1(input: &str) -> i32 {
 
     let numbers: Vec<i32> = input
         .split('\n')
-        .filter(|line| line.len() > 0)
+        .filter(|line| !line.is_empty())
         .map(|number| i32::from_str_radix(number, 2).unwrap())
         .collect();
 
@@ -112,21 +112,18 @@ pub fn part1(input: &str) -> i32 {
     gamma_rate * epsilon_rate(gamma_rate, binary_number_length)
 }
 
-pub fn oxygen_generator_rating(binary_numbers: &Vec<&str>) -> i32 {
+pub fn oxygen_generator_rating(binary_numbers: &[&str]) -> i32 {
     rating(binary_numbers, &oxygen_generator_condition)
 }
 
-pub fn co2_scrubber_rating(binary_numbers: &Vec<&str>) -> i32 {
+pub fn co2_scrubber_rating(binary_numbers: &[&str]) -> i32 {
     rating(binary_numbers, &co2_scrubber_condition)
 }
 
-pub fn rating(
-    binary_numbers: &Vec<&str>,
-    condition_function: &dyn Fn(usize, usize) -> bool,
-) -> i32 {
+pub fn rating(binary_numbers: &[&str], condition_function: &dyn Fn(usize, usize) -> bool) -> i32 {
     let binary_number_length = binary_numbers[0].len();
 
-    let mut rating_list = binary_numbers.clone();
+    let mut rating_list = binary_numbers.to_owned();
 
     for bit_position in 0..binary_number_length {
         if rating_list.len() == 1 {

@@ -72,6 +72,12 @@ pub struct SubmarineV2 {
     pub aim: i32,
 }
 
+impl Default for Submarine {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Submarine {
     pub fn new() -> Submarine {
         let horizontal_position = 0;
@@ -84,7 +90,7 @@ impl Submarine {
     }
 
     pub fn move_submarine(&mut self, instruction: &str) -> Result<&Submarine, &str> {
-        let split_instruction: Vec<&str> = instruction.split(" ").collect();
+        let split_instruction: Vec<&str> = instruction.split(' ').collect();
 
         if split_instruction.len() < 2 {
             return Err("missing value or command in submarine instruction");
@@ -94,7 +100,7 @@ impl Submarine {
             .parse::<i32>()
             .expect("unsupported submarine instruction value");
 
-        match &split_instruction[0] as &str {
+        match split_instruction[0] as &str {
             "forward" => {
                 self.horizontal_position += instruction_value;
             }
@@ -113,6 +119,12 @@ impl Submarine {
     }
 }
 
+impl Default for SubmarineV2 {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SubmarineV2 {
     pub fn new() -> SubmarineV2 {
         let horizontal_position = 0;
@@ -127,7 +139,7 @@ impl SubmarineV2 {
     }
 
     pub fn move_submarine(&mut self, instruction: &str) -> Result<&SubmarineV2, &str> {
-        let split_instruction: Vec<&str> = instruction.split(" ").collect();
+        let split_instruction: Vec<&str> = instruction.split(' ').collect();
 
         if split_instruction.len() < 2 {
             return Err("missing value or command in submarine v2 instruction");
@@ -137,7 +149,7 @@ impl SubmarineV2 {
             .parse::<i32>()
             .expect("unsupported submarine v2 instruction value");
 
-        match &split_instruction[0] as &str {
+        match split_instruction[0] as &str {
             "forward" => {
                 self.horizontal_position += instruction_value;
                 self.depth += self.aim * instruction_value;
@@ -158,7 +170,7 @@ impl SubmarineV2 {
 }
 
 pub fn part1(input: &str) -> i32 {
-    let instructions = input.split('\n').into_iter();
+    let instructions = input.split('\n');
     let mut submarine = Submarine::new();
 
     for instruction in instructions {
@@ -172,7 +184,7 @@ pub fn part1(input: &str) -> i32 {
 }
 
 pub fn part2(input: &str) -> i32 {
-    let instructions = input.split('\n').into_iter();
+    let instructions = input.split('\n');
     let mut submarine = SubmarineV2::new();
 
     for instruction in instructions {

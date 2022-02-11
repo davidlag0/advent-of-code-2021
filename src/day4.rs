@@ -74,14 +74,13 @@ impl Board {
         let mut sum = 0;
 
         for row in &self.board {
-            for position in 0..5 {
-                if row[position] > -1 {
-                    sum += &row[position];
+            for item in row {
+                if item > &-1 {
+                    sum += item;
                 }
             }
         }
-
-        return sum;
+        sum
     }
 
     pub fn is_winner(&self) -> bool {
@@ -92,7 +91,7 @@ impl Board {
         }
 
         for column in 0..5 {
-            let column_sum = *(&self.board.iter().fold(0, |acc, x| acc + x[column]));
+            let column_sum = self.board.iter().fold(0, |acc, x| acc + x[column]);
             if column_sum == -5 {
                 return true;
             }
@@ -116,7 +115,7 @@ impl BingoSubsystem {
         let numbers = lines
             .next()
             .unwrap()
-            .split(",")
+            .split(',')
             .filter_map(|number| number.parse::<i32>().ok())
             .collect();
 
@@ -138,7 +137,7 @@ impl BingoSubsystem {
         }
 
         Self {
-            numbers: numbers,
+            numbers,
             boards: bingo_boards,
             last_number_drawn: -1,
         }
@@ -147,7 +146,7 @@ impl BingoSubsystem {
     pub fn find_winner_board(&self) -> Option<&Board> {
         for board in &self.boards {
             if board.is_winner() {
-                return Some(&board);
+                return Some(board);
             }
         }
 
@@ -155,7 +154,7 @@ impl BingoSubsystem {
     }
 
     pub fn draw(&mut self) -> Result<&Vec<i32>, &str> {
-        if self.numbers.len() == 0 {
+        if self.numbers.is_empty() {
             return Err("No more numbers to draw");
         }
 
@@ -169,8 +168,8 @@ impl BingoSubsystem {
                     }
                 }
 
-                if drawn_number_index.is_some() {
-                    row[drawn_number_index.unwrap()] = -1;
+                if let Some(number) = drawn_number_index {
+                    row[number] = -1;
                 }
             }
         }
@@ -183,7 +182,7 @@ impl BingoSubsystem {
 }
 
 pub fn part1(input: &str) -> i32 {
-    let mut bingo_subsystem = BingoSubsystem::new(&input);
+    let mut bingo_subsystem = BingoSubsystem::new(input);
     let mut board_sum = 0;
 
     while bingo_subsystem.draw().is_ok() {
@@ -201,7 +200,7 @@ pub fn part1(input: &str) -> i32 {
 }
 
 pub fn part2(input: &str) -> i32 {
-    let mut bingo_subsystem = BingoSubsystem::new(&input);
+    let mut bingo_subsystem = BingoSubsystem::new(input);
 
     while bingo_subsystem.draw().is_ok() {
         if bingo_subsystem.boards.len() == 1 {
