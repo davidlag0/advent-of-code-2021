@@ -2,9 +2,10 @@
 
 COMMIT_MSG_FILE=$1
 
-MESSAGE=$(cat $COMMIT_MSG_FILE)
+#MESSAGE=$(cat $COMMIT_MSG_FILE)
 
-if cog verify "$MESSAGE"; then
+#if cog verify "$MESSAGE"; then
+if npx --no -- commitlint --edit $COMMIT_MSG_FILE; then
     echo "Commit parse succeeded"
 else
     echo "See https://www.conventionalcommits.org/en/v1.0.0"
