@@ -311,7 +311,7 @@ mod tests {
         let mut bingo_subsystem = BingoSubsystem::new(TEST_INPUT);
         bingo_subsystem.boards[0].board[0] = vec![-1, -1, -1, -1, -1];
 
-        assert_eq!(bingo_subsystem.boards[0].is_winner(), true);
+        assert!(bingo_subsystem.boards[0].is_winner());
     }
 
     #[test]
@@ -323,7 +323,7 @@ mod tests {
         bingo_subsystem.boards[0].board[3] = vec![22, 11, 13, 6, -1];
         bingo_subsystem.boards[0].board[4] = vec![2, 0, 12, 3, -1];
 
-        assert_eq!(bingo_subsystem.boards[0].is_winner(), true);
+        assert!(bingo_subsystem.boards[0].is_winner());
     }
 
     #[test]
@@ -344,7 +344,7 @@ mod tests {
             bingo_subsystem.draw().ok();
         }
 
-        assert_eq!(bingo_subsystem.find_winner_board().is_some(), false);
+        assert!(bingo_subsystem.find_winner_board().is_none());
     }
 
     #[test]
@@ -355,7 +355,7 @@ mod tests {
             bingo_subsystem.draw().ok();
         }
 
-        assert_eq!(bingo_subsystem.find_winner_board().is_some(), true);
+        assert!(bingo_subsystem.find_winner_board().is_some());
     }
 
     #[test]
