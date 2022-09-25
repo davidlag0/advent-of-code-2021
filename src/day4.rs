@@ -144,13 +144,7 @@ impl BingoSubsystem {
     }
 
     pub fn find_winner_board(&self) -> Option<&Board> {
-        for board in &self.boards {
-            if board.is_winner() {
-                return Some(board);
-            }
-        }
-
-        None
+        self.boards.iter().find(|&board| board.is_winner())
     }
 
     pub fn draw(&mut self) -> Result<&Vec<i32>, &str> {
@@ -207,11 +201,7 @@ pub fn part2(input: &str) -> i32 {
             break;
         }
 
-        bingo_subsystem.boards = bingo_subsystem
-            .boards
-            .into_iter()
-            .filter(|board| !board.is_winner())
-            .collect();
+        bingo_subsystem.boards.retain(|board| !board.is_winner());
     }
 
     bingo_subsystem.boards[0].sum() * bingo_subsystem.last_number_drawn
