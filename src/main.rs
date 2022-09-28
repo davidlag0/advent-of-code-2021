@@ -5,6 +5,7 @@ use aoc_rust_2021::day4;
 use aoc_rust_2021::day5;
 use aoc_rust_2021::day6;
 use aoc_rust_2021::day7;
+use aoc_rust_2021::day8;
 use std::env;
 use std::fs;
 use std::process;
@@ -19,6 +20,7 @@ fn main() {
     let mut chrono_start;
     let mut chrono_stop;
     let mut solution: i32;
+    let mut solution_result;
     let mut total_time: u128 = 0;
 
     if args.len() < 2 {
@@ -153,6 +155,38 @@ fn main() {
         "Solution of Day 7, Part 2: {}, Time: {}μs",
         solution, chrono_stop
     );
+
+    chrono_start = Instant::now();
+    solution_result = day8::part1(&load_file(&[&base_path, "day8.txt"].concat()));
+    chrono_stop = chrono_start.elapsed().as_micros();
+    total_time += chrono_stop;
+
+    match solution_result {
+        Ok(solution) => println!(
+            "Solution of Day 8, Part 1: {:?}, Time: {}μs",
+            solution, chrono_stop
+        ),
+        Err(error) => println!(
+            "A problem occured to solve the problem of Day 8, Part 1: {}",
+            error
+        ),
+    }
+
+    chrono_start = Instant::now();
+    solution_result = day8::part2(&load_file(&[&base_path, "day8.txt"].concat()));
+    chrono_stop = chrono_start.elapsed().as_micros();
+    total_time += chrono_stop;
+
+    match solution_result {
+        Ok(solution) => println!(
+            "Solution of Day 8, Part 2: {:?}, Time: {}μs",
+            solution, chrono_stop
+        ),
+        Err(error) => println!(
+            "A problem occured to solve the problem of Day 8, Part 2: {}",
+            error
+        ),
+    }
 
     println!("\nTotal Time: {}μs", total_time);
 }
