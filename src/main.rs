@@ -6,6 +6,7 @@ use aoc_rust_2021::day5;
 use aoc_rust_2021::day6;
 use aoc_rust_2021::day7;
 use aoc_rust_2021::day8;
+use aoc_rust_2021::day9;
 use std::env;
 use std::fs;
 use std::process;
@@ -184,6 +185,38 @@ fn main() {
         ),
         Err(error) => println!(
             "A problem occured to solve the problem of Day 8, Part 2: {}",
+            error
+        ),
+    }
+
+    chrono_start = Instant::now();
+    solution_result = day9::part1(&load_file(&[&base_path, "day9.txt"].concat()));
+    chrono_stop = chrono_start.elapsed().as_micros();
+    total_time += chrono_stop;
+
+    match solution_result {
+        Ok(solution) => println!(
+            "Solution of Day 9, Part 1: {:?}, Time: {}μs",
+            solution, chrono_stop
+        ),
+        Err(error) => println!(
+            "A problem occured to solve the problem of Day 9, Part 1: {}",
+            error
+        ),
+    }
+
+    chrono_start = Instant::now();
+    solution_result = day9::part2(&load_file(&[&base_path, "day9.txt"].concat()));
+    chrono_stop = chrono_start.elapsed().as_micros();
+    total_time += chrono_stop;
+
+    match solution_result {
+        Ok(solution) => println!(
+            "Solution of Day 9, Part 2: {:?}, Time: {}μs",
+            solution, chrono_stop
+        ),
+        Err(error) => println!(
+            "A problem occured to solve the problem of Day 9, Part 2: {}",
             error
         ),
     }
