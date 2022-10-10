@@ -240,9 +240,8 @@ pub fn part2(input: &str) -> Result<u32, &'static str> {
 
     frequencies.sort();
 
-    //Ok(frequencies.iter().copied().rev().take(3).product::<u32>())
-
-    Err("Answer is 950600 and the code provides 474474")
+    Ok(frequencies.iter().copied().rev().take(3).product::<u32>())
+    // Answer is 950600 and the code provides 474474
 }
 
 #[cfg(test)]
