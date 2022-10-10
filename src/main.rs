@@ -216,8 +216,8 @@ fn main() {
             solution, chrono_stop
         ),
         Err(error) => println!(
-            "A problem occured to solve the problem of Day 9, Part 2: {}",
-            error
+            "A problem occured to solve the problem of Day 9, Part 2: {}, Time: {}μs",
+            error, chrono_stop
         ),
     }
 

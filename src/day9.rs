@@ -240,7 +240,9 @@ pub fn part2(input: &str) -> Result<u32, &'static str> {
 
     frequencies.sort();
 
-    Ok(frequencies.iter().copied().rev().take(3).product::<u32>())
+    //Ok(frequencies.iter().copied().rev().take(3).product::<u32>())
+
+    Err("Answer is 950600 and the code provides 474474")
 }
 
 #[cfg(test)]
@@ -449,6 +451,5 @@ mod tests {
     #[test]
     fn test_part2() {
         assert_eq!(part2(TEST_INPUT), Ok(1134));
-        // Answer is 950600 and the code provides 474474.
     }
 }
