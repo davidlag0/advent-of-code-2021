@@ -142,8 +142,8 @@ pub fn sort_string_chars(strings: Vec<&str>) -> Vec<String> {
         .collect()
 }
 
-pub fn part1(input: &str) -> Result<u32, &'static str> {
-    let mut segment_counter: u32 = 0;
+pub fn part1(input: &str) -> Result<u64, &'static str> {
+    let mut segment_counter: u64 = 0;
 
     for line in input.trim().split('\n') {
         for segment in line.split(" | ").collect::<Vec<&str>>()[1]
@@ -237,7 +237,7 @@ I like this approach, very straightforward:
 https://arturh85.github.io/adventofcode-rust-2021/src/adventofcode_rust_2021/day8.rs.html#1-347
 */
 
-pub fn part2(input: &str) -> Result<u32, &'static str> {
+pub fn part2(input: &str) -> Result<u64, &'static str> {
     /*
     2 segments: 1
     3 segments: 7
@@ -248,7 +248,7 @@ pub fn part2(input: &str) -> Result<u32, &'static str> {
     5 segments: 2, 3, 5 (3 is superset of 1, 5 is subset of 9, by elimination, that leaves 2)
     */
 
-    let mut sum_of_digits: u32 = 0;
+    let mut sum_of_digits: u64 = 0;
 
     for line in input.trim().split('\n') {
         let splitted_line = line.split(" | ").collect::<Vec<&str>>();
@@ -300,7 +300,7 @@ pub fn part2(input: &str) -> Result<u32, &'static str> {
             })
             .collect::<Vec<String>>()
             .join("")
-            .parse::<u32>()
+            .parse::<u64>()
         {
             Ok(number) => {
                 sum_of_digits += number;

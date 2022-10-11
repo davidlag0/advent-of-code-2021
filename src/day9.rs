@@ -70,25 +70,25 @@ What do you get if you multiply together the sizes of the three largest basins?
 
 use std::collections::HashMap;
 
-pub fn parse_input(input: &str) -> Vec<Vec<u32>> {
+pub fn parse_input(input: &str) -> Vec<Vec<u64>> {
     input
         .split('\n')
         .filter(|line| line != &"")
         .map(|line| {
             line.split("")
-                .map(|char| char.parse::<u32>())
+                .map(|char| char.parse::<u64>())
                 .filter_map(Result::ok)
                 .collect()
         })
         .collect()
 }
 
-pub fn lowest_points(map: Vec<Vec<u32>>) -> Vec<u32> {
-    let mut lowest_points: Vec<u32> = Vec::new();
+pub fn lowest_points(map: Vec<Vec<u64>>) -> Vec<u64> {
+    let mut lowest_points: Vec<u64> = Vec::new();
 
     for y in 0..map.len() {
         for x in 0..map[y].len() {
-            let mut neighbors: Vec<u32> = Vec::new();
+            let mut neighbors: Vec<u64> = Vec::new();
 
             // Top row neighbors.
             if y != 0 {
@@ -124,14 +124,14 @@ pub fn lowest_points(map: Vec<Vec<u32>>) -> Vec<u32> {
 }
 
 pub struct Basins {
-    basins: HashMap<(usize, usize), u32>,
+    basins: HashMap<(usize, usize), u64>,
 }
 
 impl Basins {
-    pub fn new(map: &Vec<Vec<u32>>) -> Self {
-        let mut basins: HashMap<(usize, usize), u32> = HashMap::new();
-        let mut current_basin: u32 = 0;
-        let mut last_basin: u32 = 0;
+    pub fn new(map: &Vec<Vec<u64>>) -> Self {
+        let mut basins: HashMap<(usize, usize), u64> = HashMap::new();
+        let mut current_basin: u64 = 0;
+        let mut last_basin: u64 = 0;
         let mut neighbors: Vec<(usize, usize)>;
 
         for y in 0..map.len() {
@@ -180,7 +180,7 @@ impl Basins {
         Self { basins }
     }
 
-    fn neighbor_locations((y, x): &(usize, usize), map: &[Vec<u32>]) -> Vec<(usize, usize)> {
+    fn neighbor_locations((y, x): &(usize, usize), map: &[Vec<u64>]) -> Vec<(usize, usize)> {
         let mut neighbors: Vec<(usize, usize)> = Vec::new();
 
         // Top neighbor.
@@ -217,30 +217,30 @@ impl Basins {
     }
 }
 
-pub fn part1(input: &str) -> Result<u32, &'static str> {
+pub fn part1(input: &str) -> Result<u64, &'static str> {
     Ok(lowest_points(parse_input(input))
         .iter()
         .map(|point| point + 1)
         .sum())
 }
 
-pub fn part2(input: &str) -> Result<u32, &'static str> {
+pub fn part2(input: &str) -> Result<u64, &'static str> {
     let basins = Basins::new(&parse_input(input));
 
     let frequencies_map =
         basins
             .basins
             .values()
-            .fold(HashMap::new(), |mut map: HashMap<&u32, u32>, val| {
+            .fold(HashMap::new(), |mut map: HashMap<&u64, u64>, val| {
                 map.entry(val).and_modify(|frq| *frq += 1).or_insert(1);
                 map
             });
 
-    let mut frequencies = frequencies_map.values().collect::<Vec<&u32>>();
+    let mut frequencies = frequencies_map.values().collect::<Vec<&u64>>();
 
     frequencies.sort();
 
-    Ok(frequencies.iter().copied().rev().take(3).product::<u32>())
+    Ok(frequencies.iter().copied().rev().take(3).product::<u64>())
     // Answer is 950600 and the code provides 474474
 }
 
