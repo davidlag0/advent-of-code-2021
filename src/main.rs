@@ -1,5 +1,6 @@
 use aoc_rust_2021::day1;
 use aoc_rust_2021::day10;
+use aoc_rust_2021::day11;
 use aoc_rust_2021::day2;
 use aoc_rust_2021::day3;
 use aoc_rust_2021::day4;
@@ -250,6 +251,38 @@ fn main() {
         ),
         Err(error) => println!(
             "A problem occured to solve the problem of Day 10, Part 2: {}, Time: {}μs",
+            error, chrono_stop
+        ),
+    }
+
+    chrono_start = Instant::now();
+    solution_result = day11::part1(&load_file(&[&base_path, "day11.txt"].concat()));
+    chrono_stop = chrono_start.elapsed().as_micros();
+    total_time += chrono_stop;
+
+    match solution_result {
+        Ok(solution) => println!(
+            "Solution of Day 11, Part 1: {:?}, Time: {}μs",
+            solution, chrono_stop
+        ),
+        Err(error) => println!(
+            "A problem occured to solve the problem of Day 11, Part 1: {}, Time: {}μs",
+            error, chrono_stop
+        ),
+    }
+
+    chrono_start = Instant::now();
+    solution_result = day11::part2(&load_file(&[&base_path, "day11.txt"].concat()));
+    chrono_stop = chrono_start.elapsed().as_micros();
+    total_time += chrono_stop;
+
+    match solution_result {
+        Ok(solution) => println!(
+            "Solution of Day 11, Part 2: {:?}, Time: {}μs",
+            solution, chrono_stop
+        ),
+        Err(error) => println!(
+            "A problem occured to solve the problem of Day 11, Part 2: {}, Time: {}μs",
             error, chrono_stop
         ),
     }
